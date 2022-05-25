@@ -1,0 +1,26 @@
+pedidos = []
+while True:
+    opcao = int(input('1- Cadastrar um pedido\n 2- Mostrar pedido por mesa\n 3- Mostrar todos os pedidos\n 4- Total\n 5- Sair\n>> '))
+    if opcao == 1:
+        mesa = int(input("Número da mesa: "))
+        lanche = input('Digite o lanche: ')
+        bebida = input('Digite a bebida: ')
+        total = float(input('Total do pedido: '))
+        pedido = (mesa, lanche, bebida, total)
+        pedidos.append(pedido)
+    elif opcao == 2:
+        num_mesa = int(input('Número da mesa: '))
+        for pedido in pedidos:
+            if num_mesa in pedido:
+                print(pedido)
+        else:
+            print('Mesa não encontrada')
+    elif opcao == 3:
+        print(pedidos)
+    elif opcao == 4:
+        soma = 0
+        for pedido in pedidos:
+            soma += pedido[3]
+        print(soma)
+    else:
+        break
