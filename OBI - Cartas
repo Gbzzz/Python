@@ -1,0 +1,8 @@
+cartas = '11P01C02C01U02U03U04U'
+naipe = []
+i = 0
+for caractere in cartas:
+    if (index % 3 == 0):
+        carta = cartas[i-3:i]
+        print(carta)
+    i = i + 1
