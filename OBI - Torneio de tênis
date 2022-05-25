@@ -1,0 +1,23 @@
+i = 0
+ganhou = []
+perdeu = []
+
+while i < 6:
+    resultado_jogo = input()
+    i += 1
+    if resultado_jogo == 'V':
+        ganhou.append(resultado_jogo)
+    else:
+        perdeu.append(resultado_jogo)
+
+qnt_ganhou = len(ganhou)
+qnt_perdeu = len(perdeu)
+
+if qnt_ganhou == 5 or qnt_ganhou == 6:
+    print(1)
+elif qnt_ganhou == 3 or qnt_ganhou == 4:
+    print(2)
+elif qnt_ganhou == 1 or qnt_ganhou == 2:
+    print(3)
+else:
+    print('-1')
