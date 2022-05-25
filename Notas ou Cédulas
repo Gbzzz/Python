@@ -1,0 +1,15 @@
+num1 = int(input())
+while num1 != 0:
+    sobra50 = num1 // 50
+    resto50 = num1 % 50
+    print(sobra50)
+    sobra10 = resto50 // 10
+    resto10 = resto50 % 10
+    print(sobra10)
+    sobra5 = resto10 // 5
+    resto5 = resto10 % 5
+    print(sobra5)
+    sobra1 = resto5 // 1
+    resto1 = resto5 % 1
+    print(sobra1)
+    num1 = int(input()
