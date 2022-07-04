@@ -1,0 +1,25 @@
+lista = []
+doces = int(input())
+for i in range(3):
+   pokemao = int(input())
+   lista.append(pokemao)
+lista.sort()
+i = 0
+while True:
+   calculo1 = doces - lista[0]
+   if calculo1 > 0:
+       i += 1
+       calculo2 = calculo1 - lista[1]
+       if calculo2 > 0:
+           i += 1
+           calculo3 = calculo2 - lista[2]
+           if calculo3 > 0:
+               i += 1
+               break
+           else:
+               break
+       else:
+           break
+   else:
+       break
+print(i)
