@@ -9,7 +9,7 @@ while True:
     '4- Total apurado no dia       |\n' +
     '5- Sair                       |')
     print('-'*31)
-    opcao = int(input('>>> '))
+    opcao = int(input('\n>>> '))
     if opcao == 1:
         mesa = int(input('\nNúmero da mesa: \n>>> '))
         lanche = input('\nLanche: \n>>> ')
@@ -23,13 +23,13 @@ while True:
             if num_mesa in pedido:
                 print('\n',pedido)
     if opcao == 3:
-        print('Pedidos realizados hoje: ')
+        print('\nPedidos realizados hoje: \n')
         print(*pedidos)
     if opcao == 4:
         soma = 0
         for pedido in pedidos:
             soma += pedido[3]
-        print('{:.2f}'.format(soma))
+        print('\n','{:.2f}'.format(soma))
     if opcao == 5:
         time.sleep(0.5)
         print("\nFinalizando...\n")
