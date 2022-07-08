@@ -1,36 +1,37 @@
 import time
+
 pedidos = []
 while True:
-  print("-----Menu-----")
-  opcao = int(input("\n1 - Realizar pedido\n2 - Mostrar todos os pedidos\n3 - Mostrar pedido por mesa\n4 - Valor Total\n5 - Sair\n \n>>> "))
-  if opcao == 1:
-    mesa = int(input("\nDigite o número da mesa: \n>>> "))
-    lanche = input("\nQual o lanche? \n>>> ")
-    bebida = input("\nQual a bebida? \n>>> ")
-    valor_total = float(input("\nQual o valor? \n>>> "))
-    print("\nPedido realizado!\n")
-    pedido = (mesa, lanche, bebida, valor_total)
-    pedidos.append(pedido)
-  if opcao == 2:
-    print("\n", *pedidos, "\n")
-  if opcao == 3:
-    num_mesa = int(input("\nNúmero da mesa: \n>>> "))
-    for pedido in pedidos:
-      if num_mesa in pedido:
-        print("\n",pedido,"\n")
-      if num_mesa not in pedido:
-        print("\nMesa não encontrada.\n")
-  if opcao == 4:
-    soma  = 0
-    for pedido in pedidos:
-      soma += pedido[3]
-    print(soma)
-  if opcao == 5:
-    print("\nFinalizando.")
-    time.sleep(1.0)
-    print(".")
-    time.sleep(1.0)
-    print(".")
-    time.sleep(1.0)
-    print(".")
-    break
+    print('-'*31) 
+    print('1- Cadastrar um pedido        |\n' +
+    '2- Mostrar pedido por mesa    |\n' +
+    '3- Mostrar todos os pedidos   |\n' +
+    '4- Total apurado no dia       |\n' +
+    '5- Sair                       |')
+    print('-'*31)
+    opcao = int(input('>>> '))
+    if opcao == 1:
+        mesa = int(input('\nNúmero da mesa: \n>>> '))
+        lanche = input('\nLanche: \n>>> ')
+        bebida = input('\nBebida: \n>>> ')
+        total = float(input('\nValor total: \n>>> '))
+        pedido = (mesa, lanche, bebida, total)
+        pedidos.append(pedido)
+    if opcao == 2:
+        num_mesa = int(input('\nNúmero da mesa na qual deseja ver os pedidos: \n>>> '))
+        for pedido in pedidos:
+            if num_mesa in pedido:
+                print('\n',pedido)
+    if opcao == 3:
+        print('Pedidos realizados hoje: ')
+        print(*pedidos)
+    if opcao == 4:
+        soma = 0
+        for pedido in pedidos:
+            soma += pedido[3]
+        print('{:.2f}'.format(soma))
+    if opcao == 5:
+        time.sleep(0.5)
+        print("\nFinalizando...\n")
+        time.sleep(0.5)
+        break
