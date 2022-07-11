@@ -1,0 +1,21 @@
+from ast import Return
+
+cidade_melhor = []
+
+
+while True:
+
+    cidade = input('Cidade: ').upper()
+    if cidade == 'FIM':
+        break
+    distancia = int(input('Ditância: '))
+    passagem = (int(input('Passagem: ')) * (2))
+    if passagem <= 300:
+        juntar_dois = str(distancia) + str(' ') + cidade
+        cidade_melhor.append(juntar_dois)
+    else:
+        Return(cidade)
+
+cidade_melhor.sort()
+
+print(cidade_melhor[-1])
