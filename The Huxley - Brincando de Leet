@@ -6,7 +6,7 @@ while True:
         print("numeros")
         print(zero)
         break
-    if nome == "":
+    if len(nome) == 0:
         print("vazio")
         print(zero)
         break
