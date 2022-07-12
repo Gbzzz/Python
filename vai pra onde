@@ -5,17 +5,19 @@ cidade_melhor = []
 
 while True:
 
-    cidade = input('Cidade: ').upper()
+    cidade = input('Cidade: ').upper() #utilizando upper, pois o último print tem que ser maiúsculo
     if cidade == 'FIM':
         break
     distancia = int(input('Ditância: '))
-    passagem = (int(input('Passagem: ')) * (2))
+    passagem = (int(input('Passagem: ')) * (2)) #multiplico a passagem por 2x pq são passagens de ida e volta
     if passagem <= 300:
-        juntar_dois = str(distancia) + str(' ') + cidade
+        juntar_dois = str(distancia) + str(' ') + cidade #váriavel criada para associar a distância à cidade
         cidade_melhor.append(juntar_dois)
     else:
-        Return(cidade)
+        Return(cidade) #se o valor da passagem for mais que 300, ele já não vai para essa cidade
 
 cidade_melhor.sort()
 
-print(cidade_melhor[-1])
+quebrar_string = cidade_melhor[-1].split() #variável para separar a distância do nome da cidade, pra poder printar no final apenas o nome da cidade
+
+print(quebrar_string[-1])
