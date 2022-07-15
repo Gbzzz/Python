@@ -17,6 +17,7 @@ while janela_aberta:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             jane_aberta = False
+            pygame.quit()
 
     comandos = pygame.key.get_pressed()
     if comandos[pygame.K_UP]:
@@ -32,4 +33,3 @@ while janela_aberta:
     janela.fill((0,0,0))
     pygame.draw.circle(janela, (255,0,0), (x,y), 50)
     pygame.display.update()
-pygame.quit()
