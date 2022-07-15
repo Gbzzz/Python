@@ -1,21 +1,40 @@
-import random
+import random #importando para sempre que rodar o jogo, ele sortear um número diferente
 
-lista_valores = list(range(26))
-num_escolhido = []
-num_escolhido.append(lista_valores[random.randint(0,26)])
+
+lista_valores = list(range(26)) #criando lista com o tamnho de 25 caracteres e ordenando ela
+num_escolhido = [] #criando uma lista para armazenar o número sorteado
+num_escolhido.append(lista_valores[random.randint(0,26)]) #sorteando e adicionando na lista o número sorteado
 tentativa = int(input(">>Digite um número: "))
-dica_maior = tentativa < num_escolhido[0]
-dica_menor = tentativa > num_escolhido[0]
-print(num_escolhido)
+dica_maior = tentativa > num_escolhido[0] #verificando se a tentativa é maior
+dica_menor = tentativa < num_escolhido[0] #verificando se a tentativa é menor
 
 i = 0
+
 for i in range(5):
-   if tentativa == num_escolhido[0]:
-       print("Parabéns, vc acertou")
-       break
-   i += 1
-   if i == 5:
-       break
-   if tentativa != num_escolhido[0]:
-       print("ERROOOOUUU")
-       tentativa = int(input(">>Digite um número: "))
+    dica_maior = tentativa > num_escolhido[0] #utilizando dentro das repetições pq a cada loop, o usuário coloca um valor novo em seu "chute"
+    dica_menor = tentativa < num_escolhido[0]
+    if tentativa == num_escolhido[0]: #se acertar, o jogo já para.
+        print("Parabéns, vc acertou")
+        print("Finalizando...")
+        break
+    if i == 5: #deifinindo 5 tentivas, após isso, o jogo fecha
+        print("Você perdeu :c")
+        print("Finalizando...")
+        break
+
+    if i == 4:
+        print("Você só tem mais 1 rodada.")
+
+    if tentativa != num_escolhido[0]:
+        print("ERROOOOUUU") 
+        tentativa = int(input(">>Digite um número: "))
+        dica_maior = tentativa > num_escolhido[0]
+        dica_menor = tentativa < num_escolhido[0]
+        if tentativa == num_escolhido[0]:
+            print("Parabéns, vc acertou")
+            print("Finalizando...")
+            break
+    if dica_maior is True: #após a verificação feita, se for True o valor boo, printa uma simples "dica"
+        print("Sua tentativa foi maior que o número escolhido")
+    elif dica_menor is True: #após a verificação feita, se for True o valor boo, printa uma simples "dica"
+        print("Sua tentativa foi menor que o número escolhido")
