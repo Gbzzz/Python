@@ -1,0 +1,108 @@
+import turtle
+
+wn=turtle.Screen()
+wn.title("Pong por@Gabriel.Gineste")
+wn.bgcolor("black")
+wn.setup(width=800,height=600)
+wn.tracer(0)
+
+placar1 = 0
+placar2 = 0
+
+jogador1 = turtle.Turtle()
+jogador1.speed(0)
+jogador1.shape("square")
+jogador1.color("white")
+jogador1.shapesize(stretch_wid = 5, stretch_len = 1)
+jogador1.penup()
+jogador1.goto(-350,0)
+
+jogador2 = turtle.Turtle()
+jogador2.speed(0)
+jogador2.shape("square")
+jogador2.color("white")
+jogador2.shapesize(stretch_wid = 5, stretch_len = 1)
+jogador2.penup()
+jogador2.goto(350,0)
+
+bola = turtle.Turtle()
+bola.speed(0)
+bola.shape("square")
+bola.color("white")
+bola.penup()
+bola.goto(0,0)
+bola.dx = 0.2
+bola.dy = -0.2
+
+caneta=turtle.Turtle()
+caneta.speed(0)
+caneta.color("white")
+caneta.penup()
+caneta.hideturtle()
+caneta.goto(0,260)
+caneta.write("Jogador 1: 0                        Jogador 2: 0", align = "center", font = ("Courier", 20, "normal"))
+
+def jogador1_up():
+    y = jogador1.ycor()
+    y += 20
+    jogador1.sety(y)
+
+def jogador1_down():
+    y = jogador1.ycor()
+    y -= 20
+    jogador1.sety(y)
+
+def jogador2_up():
+   y = jogador2.ycor()
+   y += 20
+   jogador2.sety(y)
+
+def jogador2_down():
+    y = jogador2.ycor()
+    y -= 20
+    jogador2.sety(y)
+
+
+wn.listen()
+wn.onkeypress(jogador1_up,"w")
+wn.onkeypress(jogador1_down,"s")
+wn.onkeypress(jogador2_up,"Up")
+wn.onkeypress(jogador2_down,"Down")
+
+while True:
+    wn.update()
+
+    bola.setx(bola.xcor() + bola.dx)
+    bola.sety(bola.ycor() + bola.dy)
+
+    #limites da tela
+
+    if bola.ycor() > 290: 
+        bola.sety(290)
+        bola.dy *= -1
+
+    if bola.ycor()< -290:
+        bola.sety(-290)
+        bola.dy *= -1
+
+    if bola.xcor() > 390:
+        bola.goto(0, 0)
+        bola.dx *= -1
+        placar1 += 1
+        caneta.clear()
+        caneta.write("Jogador 1: {}                        Jogador 2:  {}".format(placar1, placar2), align = "center", font = ("Courier", 20, "normal"))
+
+    if bola.xcor() < -390:
+        bola.goto(0, 0)
+        bola.dx *= -1
+        placar2 += 1
+        caneta.clear()
+        caneta.write("Jogador 1: {}                         Jogador 2:  {}".format(placar1, placar2), align = "center", font = ("Courier", 20, "normal"))
+
+    if(bola.xcor()>340 and bola.xcor() < 350) and (bola.ycor() < jogador2.ycor() +40 and bola.ycor() > jogador2.ycor() -40):
+        bola.setx(340)
+        bola.dx *= -1
+
+    if(bola.xcor() < -340 and bola.xcor() > -350) and (bola.ycor() < jogador1.ycor() +40 and bola.ycor() > jogador1.ycor() -40):
+        bola.setx(-340)
+        bola.dx *= -1
