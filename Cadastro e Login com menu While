@@ -1,0 +1,42 @@
+#antes de rodar o código, crie um arquivo chamado 'logins.txt'
+
+import time #importando a biblioteca time para o uso apenas na opcção 3 do time.sleep
+
+while True:
+    print('\n-----Menu-----\n'+
+    '\n1 - Login\n' +
+    '2 - Cadastro\n'+
+    '3 - Sair')
+    
+    opcao = int(input('\n>>> '))
+   
+    if opcao == 1:
+        arq = open('logins.txt') #abrindo no modo de leitura print('Efetue o seu login') 
+        nome_login = input('\nDigite o seu nome de usuario:\n>>> ')
+        senha_login = input('\nDigite a sua senha de usuário:\n>>> ')
+
+        registrados = arq.readlines() 
+        if nome_login + ' ' + senha_login + '\n' in registrados: 
+            print('\nBem vindo, {}!\n'.format(nome_login)) 
+        else: print('\nVocê deve ter digitado seu nome de usuario errado, por favor verifique.\n') 
+        arq.close()
+
+    if opcao == 2:
+        arq = open('logins.txt', 'a') 
+        print('\nOlá, aqui você pode adicionar uma nova conta!\n') 
+        nome_usuario = input('\nDigite o nome de usuário:\n>>> ')
+        senha_usuario = input('\nDigite a sua senha de usuário:\n>>> ')
+
+        arq.write(nome_usuario)
+        arq.write(" ")
+        arq.write(senha_usuario)
+        arq.write("\n")
+
+        print('\nCadastro realizado com sucesso!\n') 
+        arq.close()
+        
+
+    if opcao == 3:
+        print('Finalizando...')
+        time.sleep(0.5) 
+        break
