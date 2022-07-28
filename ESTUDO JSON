@@ -1,0 +1,68 @@
+import json
+
+with open('python/dicionario.json') as json_file:
+    data = json.load(json_file)
+    cardapio = data['cardapio']
+
+def linhas():
+    print('-' * 30)
+
+print('\n')
+
+linhas()
+print("Cardápio".center(30))
+linhas()
+
+print('\n')
+linhas()
+for pizza in cardapio[0]['pizzas']:
+    print('{} >>>> {}'.format(pizza['sabor'], pizza['valor']))
+linhas()
+
+print('\n')
+linhas()
+for beber in cardapio[0]['bebidas']:
+    print('{} >>>> {}'.format(beber['bebida'], beber['valor']))
+linhas()
+print('\n')
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+{
+    "cardapio" : [{
+        "pizzas" : [{
+            "sabor" : "Calabresa",
+            "valor" : "R$22,00"
+        },
+        {
+            "sabor" : "Frango",
+            "valor" : "R$22,00"
+        },
+        {
+            "sabor" : "Portuguesa",
+            "valor" : "R$24,00"
+        },
+        {
+            "sabor" : "Lombo",
+            "valor" : "R$35,00"
+        },
+        {
+            "sabor" : "Carne de Sol",
+            "valor" : "R$27,00"
+        }],
+        "bebidas" : [{
+            "bebida" : "Agua",
+            "valor" : "R$2,50"
+        },
+        {
+            "bebida" : "Agua c/ gas",
+            "valor" : "R$3,50"
+        },
+        {
+            "bebida" : "Suco",
+            "valor" : "R$5,00"
+        }]
+    }]
+}
