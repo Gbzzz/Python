@@ -1,4 +1,7 @@
 import json
+import time
+
+pedidos = []
 
 with open('python/dicionario.json') as json_file:
     data = json.load(json_file)
@@ -15,16 +18,56 @@ linhas()
 
 print('\n')
 linhas()
+print("Pizzas".center(30))
+linhas()
+
 for pizza in cardapio[0]['pizzas']:
     print('{} >>>> {}'.format(pizza['sabor'], pizza['valor']))
 linhas()
 
 print('\n')
 linhas()
+print("Bebidas".center(30))
+linhas()
 for beber in cardapio[0]['bebidas']:
     print('{} >>>> {}'.format(beber['bebida'], beber['valor']))
 linhas()
 print('\n')
+
+while True:
+    print('-'*31) 
+    print('1- Realizar um pedido         |\n' +
+    '2- Mostrar pedido por mesa    |\n' +
+    '3- Mostrar todos os pedidos   |\n' +
+    '4- Total apurado no dia       |\n' +
+    '5- Sair                       |')
+    print('-'*31)
+    opcao = int(input('\n>>> '))
+    if opcao == 1:
+        mesa = int(input('\nNúmero da mesa: \n>>> '))
+        lanche = input('\nLanche: \n>>> ')
+        bebida = input('\nBebida: \n>>> ')
+        total = float(input('\nValor total: \n>>> '))
+        pedido = (mesa, lanche, bebida, total)
+        pedidos.append(pedido)
+    if opcao == 2:
+        num_mesa = int(input('\nNúmero da mesa na qual deseja ver os pedidos: \n>>> '))
+        for pedido in pedidos:
+            if num_mesa in pedido:
+                print('\n',pedido)
+    if opcao == 3:
+        print('\nPedidos realizados hoje: \n')
+        print(*pedidos)
+    if opcao == 4:
+        soma = 0
+        for pedido in pedidos:
+            soma += pedido[3]
+        print('\n','{:.2f}'.format(soma))
+    if opcao == 5:
+        time.sleep(0.5)
+        print("\nFinalizando...\n")
+        time.sleep(0.5)
+        break
 
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------
