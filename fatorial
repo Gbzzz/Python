@@ -1,0 +1,20 @@
+while True:
+    num = int(input("digita ae: "))
+
+    if num == 0:
+        print(1)
+        break
+
+    lista = []
+
+    for i in range(num):
+        lista.append(i + 1) #colocando +1 para a lista não começar do zero
+
+    num_lista = 1
+
+    for fat in lista:
+        fat = fat * num_lista
+        num_lista = fat
+
+    print(fat)
+    break
