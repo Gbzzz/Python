@@ -1,7 +1,7 @@
 while True:
     num = int(input("digita ae: "))
 
-    if num == 0:
+    if num == 0 or num < 0:
         print(1)
         break
 
