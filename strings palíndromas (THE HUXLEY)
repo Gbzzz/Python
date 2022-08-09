@@ -1,0 +1,34 @@
+num = int(input())
+
+for i in range(num):
+    palavra = input().lower()
+
+    lista = []
+    lista_reversa = []
+
+    lista.append(palavra)
+    lista_reversa.append(palavra)
+
+    lista = list(palavra) #separando caracter por caracter na lista.
+    lista_reversa = list(palavra)
+
+    for i in lista: #removendo os espaços vazios.
+        if " " in lista:
+            lista.remove(" ")
+
+    for i in lista_reversa:
+        if " " in lista_reversa:
+            lista_reversa.remove(" ")
+
+    lista_reversa.reverse() #usando função reverse para poder comparar as duas listas.
+
+    if lista == lista_reversa:
+        print("SIM")
+    else:
+        print("NAO")
+
+    for n in lista: #removendo tudo das listas, pq elas podem ser usadas novamnete.
+        lista.remove(n)
+
+    for m in lista_reversa:
+        lista_reversa.remove(m)
