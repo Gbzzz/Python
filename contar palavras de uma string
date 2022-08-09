@@ -1,0 +1,7 @@
+palavras = []
+
+texto = input().split()
+
+palavras.append(texto)
+
+print(len(*palavras))
