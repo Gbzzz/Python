@@ -1,0 +1,110 @@
+class No:
+
+    def __init__(self, dados):
+        self.dados = dados
+        self.proximo = None
+
+class Queue:
+
+    def __init__(self):
+        self.inicio = None
+        self.ultimo = None
+        self.tamanho = 0
+    
+    def getTamanho(self):
+        return self.tamanho
+
+    def adicionarNaFila(self, dados):
+        if self.tamanho == 0: #verificando se o último está vazio, pra poder chamar o nó para o inicio ( ele vai receber none) e adicionar no ultimo a que estava no inicio
+            self.inicio = No(dados)
+            self.ultimo = self.inicio
+        else:
+            self.ultimo.proximo = No(dados)
+            self.ultimo = self.ultimo.proximo
+        self.tamanho += 1
+
+    def removerDaFila(self):
+        if self.tamanho == 0: #verificando se o inicio está vazio, pra evitar erros
+            return None
+        else:
+            self.inicio = self.inicio.proximo # pega oq tá na cabeça e coloca no prox 
+            self.tamanho -= 1
+            return self.inicio.dados
+     
+    def primeiroDaFila(self):
+        return self.inicio.dados
+
+    def mostrarFila(self):
+        ponteiro = self.inicio
+        while ponteiro:
+            print(ponteiro.dados)
+            ponteiro = ponteiro.proximo
+        
+    def girarFila(self):
+        girar = self.inicio.dados
+        self.removerDaFila()
+        self.adicionarNaFila(girar)
+    
+    def girarVariasVezes(self, qtdGiros):
+        self.qtdGiros = qtdGiros
+        for i in range(self.qtdGiros):
+            self.girarFila()
+
+lista = Queue()
+
+while True:
+    print('\n1 - Adicionar Candidato')
+    print('2 - Remover Candidato')
+    print('3 - Primeiro Candidato')
+    print('4 - Mostrar todos os candidatos')
+    print('5 - Girar 1x a fila de candidatos')
+    print('6 - Escolha quantas vezes girar a fila de candidatos')
+    print('7 - Sair')
+
+    opcao = int(input('\n>>> '))
+
+    if opcao == 1:
+        print('\nDigite o nome do candidato')
+        candidato = input(">>> ")
+        lista.adicionarNaFila(candidato)
+        print('\nCandidato adicionado a fila!')
+    
+    elif opcao == 2:
+        if lista.getTamanho() == 0:
+            print('\nNenhum candidato adicionado a fila :c')
+        else:
+            lista.removerDaFila()
+            print('Candidato removido com sucesso!')
+            lista.mostrarFila()
+    
+    elif opcao == 3:
+        print('O primeiro candidato:')
+        print(lista.primeiroDaFila())
+    
+    elif opcao == 4:
+        print('Todos os candidatos:')
+        lista.mostrarFila()
+    
+    elif opcao == 5:
+        lista.girarFila()
+        print('A lista foi girada com sucesso!')
+        lista.mostrarFila()
+
+    elif opcao == 6:
+        print('Quantas vezes vc deseja girar a fila?')
+        qtdGiros = int(input("\n>>>"))
+        lista.girarVariasVezes(qtdGiros)
+        print('Lista girada {}x com sucesso!'.format(qtdGiros))
+        lista.mostrarFila()
+
+    elif opcao == 7:
+        print('Finalizando...')
+        time.sleep(0.5)
+        break
+
+    else:
+        print('Opção inválida :c')
+
+
+
+        
