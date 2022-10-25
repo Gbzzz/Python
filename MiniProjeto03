@@ -1,0 +1,57 @@
+import timeit
+import random
+
+minimo = 0
+maximo = 100
+qtdTestes = 10
+
+lista = list(range(maximo))
+
+def ProcurarValorAleatorio():
+  return random.randint(minimo, maximo)
+
+def buscaSequencial(lista, valorPesquisado):
+    posicao = 0
+    encontrou = False
+    tamLista = len(lista)
+    while posicao < tamLista and not encontrou:
+        if lista[posicao] == valorPesquisado:
+            encontrou = True
+        else:
+            posicao = posicao + 1
+            return encontrou
+
+def buscaBinaria(lista, valorPesquisado):
+   inicio = 0
+   fim = len(lista)-1
+   encontrou = False
+   while inicio <= fim and not encontrou:
+     meio = (inicio + fim) // 2
+     if lista[meio] == valorPesquisado:
+       encontrou = True
+     else:
+       if valorPesquisado < lista[meio]:
+          fim = meio-1
+       else:
+          inicio = meio+1
+   return encontrou
+
+def buscaMista(lista, valorPesquisado):
+  if valorPesquisado > 128:
+    print("\n*Busca binaria*")
+    buscaBinaria(lista, valorPesquisado)
+  else:
+    print("\n*Busca Sequencial*")
+    buscaSequencial(lista, valorPesquisado)
+
+
+def funcaoRealizaTeste():
+  valor = ProcurarValorAleatorio()
+  resultado = buscaMista(lista, valor)
+  print(f'procurando o valor {valor} na lista de tamanho {len(lista)} -> resultado: {resultado} ')
+
+
+tempo = timeit.timeit( stmt = funcaoRealizaTeste, number = qtdTestes)
+
+print(f'\nteste repetido {qtdTestes} vezes')
+print(f'\ntempo de duração do teste: {tempo}')
