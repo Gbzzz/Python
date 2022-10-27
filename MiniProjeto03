@@ -2,8 +2,8 @@ import timeit
 import random
 
 minimo = 0
-maximo = 100
-qtdTestes = 10
+maximo = 1000000000
+qtdTestes = 1
 
 lista = list(range(maximo))
 
@@ -19,12 +19,13 @@ def buscaSequencial(lista, valorPesquisado):
             encontrou = True
         else:
             posicao = posicao + 1
-            return encontrou
+    return encontrou
 
 def buscaBinaria(lista, valorPesquisado):
    inicio = 0
    fim = len(lista)-1
    encontrou = False
+
    while inicio <= fim and not encontrou:
      meio = (inicio + fim) // 2
      if lista[meio] == valorPesquisado:
@@ -37,21 +38,35 @@ def buscaBinaria(lista, valorPesquisado):
    return encontrou
 
 def buscaMista(lista, valorPesquisado):
-  if valorPesquisado > 128:
-    print("\n*Busca binaria*")
+  valorPesquisado = ProcurarValorAleatorio()
+  if len(lista) > 128:
     buscaBinaria(lista, valorPesquisado)
   else:
-    print("\n*Busca Sequencial*")
     buscaSequencial(lista, valorPesquisado)
 
 
-def funcaoRealizaTeste():
-  valor = ProcurarValorAleatorio()
-  resultado = buscaMista(lista, valor)
-  print(f'procurando o valor {valor} na lista de tamanho {len(lista)} -> resultado: {resultado} ')
+def funcaoBuscaMista():
+  valorPesquisado = ProcurarValorAleatorio()
+  buscaMista(lista, valorPesquisado)
+
+def funcaoBuscaSequencial():
+  valorPesquisado = ProcurarValorAleatorio()
+  buscaSequencial(lista, valorPesquisado)
+
+def funcaoBinaria():
+  valorPesquisado = ProcurarValorAleatorio()
+  buscaBinaria(lista, valorPesquisado)
 
 
-tempo = timeit.timeit( stmt = funcaoRealizaTeste, number = qtdTestes)
+tempoBuscaMista = timeit.timeit(stmt =funcaoBuscaMista ,number = qtdTestes)
 
-print(f'\nteste repetido {qtdTestes} vezes')
-print(f'\ntempo de duração do teste: {tempo}')
+tempoBuscaSequencial = timeit.timeit(stmt =funcaoBuscaSequencial ,number = qtdTestes)
+
+tempoBuscaBinaria = timeit.timeit(stmt =funcaoBinaria ,number = qtdTestes)
+
+
+print(f'\ntempo de duração do teste da busca Mista: {tempoBuscaMista}')
+
+print(f'\ntempo de duração do teste da busca Sequencial: {tempoBuscaSequencial}')
+
+print(f'\ntempo de duração do testeda busca Binária: {tempoBuscaBinaria}')
