@@ -2,8 +2,8 @@ import timeit
 import random
 
 minimo = 0
-maximo = 1000000000
-qtdTestes = 1
+maximo = 100
+qtdTestes = 1000
 
 lista = list(range(maximo))
 
@@ -44,7 +44,6 @@ def buscaMista(lista, valorPesquisado):
   else:
     buscaSequencial(lista, valorPesquisado)
 
-
 def funcaoBuscaMista():
   valorPesquisado = ProcurarValorAleatorio()
   buscaMista(lista, valorPesquisado)
@@ -57,16 +56,67 @@ def funcaoBinaria():
   valorPesquisado = ProcurarValorAleatorio()
   buscaBinaria(lista, valorPesquisado)
 
+while True:
+  opcao = int(input("\nTeste 1 - 100 elementos \nTeste 2 - 100.000 elementos\nTeste 3 - 100.000.000 elementos\n4 - Sair\n\n>>> "))
 
-tempoBuscaMista = timeit.timeit(stmt =funcaoBuscaMista ,number = qtdTestes)
+  if opcao == 1:
 
-tempoBuscaSequencial = timeit.timeit(stmt =funcaoBuscaSequencial ,number = qtdTestes)
+    minimo = 0
+    maximo = 100
+    qtdTestes = 1000
 
-tempoBuscaBinaria = timeit.timeit(stmt =funcaoBinaria ,number = qtdTestes)
+    tempoBuscaMista = timeit.timeit(stmt =funcaoBuscaMista ,number = qtdTestes)
 
+    tempoBuscaSequencial = timeit.timeit(stmt =funcaoBuscaSequencial ,number = qtdTestes)
 
-print(f'\ntempo de duração do teste da busca Mista: {tempoBuscaMista}')
+    tempoBuscaBinaria = timeit.timeit(stmt =funcaoBinaria ,number = qtdTestes)
 
-print(f'\ntempo de duração do teste da busca Sequencial: {tempoBuscaSequencial}')
+    print(f'\ntempo de duração do teste da busca Mista: {tempoBuscaMista}')
 
-print(f'\ntempo de duração do testeda busca Binária: {tempoBuscaBinaria}')
+    print(f'\ntempo de duração do teste da busca Sequencial: {tempoBuscaSequencial}')
+
+    print(f'\ntempo de duração do testeda busca Binária: {tempoBuscaBinaria}')
+
+  elif opcao == 2:
+    minimo = 0
+    maximo = 100000
+    qtdTestes = 1000
+    lista = list(range(maximo))
+
+    tempoBuscaMista = timeit.timeit(stmt =funcaoBuscaMista ,number = qtdTestes)
+
+    tempoBuscaSequencial = timeit.timeit(stmt =funcaoBuscaSequencial ,number = qtdTestes)
+
+    tempoBuscaBinaria = timeit.timeit(stmt =funcaoBinaria ,number = qtdTestes)
+
+    print(f'\ntempo de duração do teste da busca Mista: {tempoBuscaMista}')
+
+    print(f'\ntempo de duração do teste da busca Sequencial: {tempoBuscaSequencial}')
+
+    print(f'\ntempo de duração do testeda busca Binária: {tempoBuscaBinaria}')
+    
+
+  elif opcao == 3:
+    minimo = 0
+    maximo = 100000000
+    qtdTestes = 3
+    lista = list(range(maximo))
+
+    tempoBuscaMista = timeit.timeit(stmt =funcaoBuscaMista ,number = qtdTestes)
+
+    tempoBuscaSequencial = timeit.timeit(stmt =funcaoBuscaSequencial ,number = qtdTestes)
+
+    tempoBuscaBinaria = timeit.timeit(stmt =funcaoBinaria ,number = qtdTestes)
+
+    print(f'\ntempo de duração do teste da busca Mista: {tempoBuscaMista}')
+
+    print(f'\ntempo de duração do teste da busca Sequencial: {tempoBuscaSequencial}')
+
+    print(f'\ntempo de duração do testeda busca Binária: {tempoBuscaBinaria}')
+
+  elif opcao == 4:
+    print("Finalizando...")
+    break
+  
+  else:
+    print("Opção inválida :(")
