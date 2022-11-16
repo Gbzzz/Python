@@ -1,0 +1,134 @@
+import timeit
+
+minimo = 0
+maximo = 1000
+qtdTestes = 100
+
+lista = list(range(maximo))
+
+
+def selectionSort(umaLista):
+    for posicaoVerificada in range(len(umaLista)-1,0,-1):
+        posicaoMaior = 0
+        for posicao in range(1, posicaoVerificada + 1):
+            if umaLista[posicao]>umaLista[posicaoMaior]:
+                posicaoMaior = posicao
+        temp = umaLista[posicaoVerificada]
+        umaLista[posicaoVerificada] = umaLista[posicaoMaior]
+        umaLista[posicaoMaior] = temp
+
+def mergeSort(umaLista):
+    #print("Splitting >>",umaLista)
+    if len(umaLista)>1:
+        meio = len(umaLista)//2
+        esquerda = umaLista[:meio]
+        direita = umaLista[meio:]
+
+        mergeSort(esquerda)
+        mergeSort(direita)
+
+        i=0
+        j=0
+        k=0
+        while i < len(esquerda) and j < len(direita):
+            if esquerda[i] < direita[j]:
+                umaLista[k]=esquerda[i]
+                i=i+1
+            else:
+                umaLista[k]=direita[j]
+                j=j+1
+            k=k+1
+
+        while i < len(esquerda):
+            umaLista[k]=esquerda[i]
+            i=i+1
+            k=k+1
+
+        while j < len(direita):
+            umaLista[k]=direita[j]
+            j=j+1
+            k=k+1
+    #print("Merging >>",umaLista)
+
+def buscaMista(umaLista):
+    umaLista = lista
+    if len(umaLista) < 128:
+        selectionSort(umaLista)
+    mergeSort(umaLista)
+
+def funcaoSelectioSort():
+    umaLista = lista
+    selectionSort(umaLista)
+
+def funcaoMergeSort():
+    umaLista = lista
+    mergeSort(umaLista)
+
+def funcaoOrdenacaoMista():
+    umaLista = lista
+    buscaMista(umaLista)
+
+while True:
+  opcao = int(input("\n1 - 100x em uma lista com 1000 elementos \n2 - 3x em uma lista com 10.000 elementos\n3 - 1x em uma lista com 20.000 elementos\n4 - Sair\n\n>>> "))
+
+  if opcao == 1:
+
+    minimo = 0
+    maximo = 1000
+    qtdTestes = 100
+    
+    tempoMergeSort = timeit.timeit(stmt=funcaoMergeSort, number= qtdTestes)
+
+    tempoSelectionSort = timeit.timeit(stmt=funcaoSelectioSort, number= qtdTestes)
+
+    tempoOrdenacaoMista = timeit.timeit(stmt=funcaoOrdenacaoMista, number= qtdTestes)
+
+    print(f'\ntempo de duração do Merge Sort: {tempoMergeSort}')
+
+    print(f'\ntempo de duração do Selection Sort: {tempoSelectionSort}')
+
+    print(f'\ntempo de duração da Ordenação Mista: {tempoOrdenacaoMista}')
+
+  elif opcao == 2:
+    minimo = 0
+    maximo = 10000
+    qtdTestes = 3
+    lista = list(range(maximo))
+
+    tempoMergeSort = timeit.timeit(stmt=funcaoMergeSort, number= qtdTestes)
+
+    tempoSelectionSort = timeit.timeit(stmt=funcaoSelectioSort, number= qtdTestes)
+
+    tempoOrdenacaoMista = timeit.timeit(stmt=funcaoOrdenacaoMista, number= qtdTestes)
+
+    print(f'\ntempo de duração do Merge Sort: {tempoMergeSort}')
+
+    print(f'\ntempo de duração do Selection Sort: {tempoSelectionSort}')
+
+    print(f'\ntempo de duração da Ordenação Mista: {tempoOrdenacaoMista}')
+    
+
+  elif opcao == 3:
+    minimo = 0
+    maximo = 20000
+    qtdTestes = 1
+    lista = list(range(maximo))
+
+    tempoMergeSort = timeit.timeit(stmt=funcaoMergeSort, number= qtdTestes)
+
+    tempoSelectionSort = timeit.timeit(stmt=funcaoSelectioSort, number= qtdTestes)
+
+    tempoOrdenacaoMista = timeit.timeit(stmt=funcaoOrdenacaoMista, number= qtdTestes)
+
+    print(f'\ntempo de duração do Merge Sort: {tempoMergeSort}')
+
+    print(f'\ntempo de duração do Selection Sort: {tempoSelectionSort}')
+
+    print(f'\ntempo de duração da Ordenação Mista: {tempoOrdenacaoMista}')
+
+  elif opcao == 4:
+    print("Finalizando...")
+    break
+  
+  else:
+    print("Opção inválida :(")
