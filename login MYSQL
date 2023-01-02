@@ -1,0 +1,61 @@
+import mysql.connector
+
+class Login():
+
+    def __init__(self):
+        pass
+
+    def conectarBD(self):
+        self.conexao = mysql.connector.connect(host='localhost', database='testepython', user='root', password='#Guilhermeb1*')
+        if self.conexao.is_connected():
+            """print("\n----------Conectou pai----------\n")"""
+            self.cursor = self.conexao.cursor()
+
+    def desconectarBD(self):
+        self.conexao.close()
+        self.cursor.close()
+
+    def realizarCadastro(self, login, nome, senha):
+        self.cursor.execute('INSERT INTO tab_login (DSC_CPF, DSC_NOME, DSC_SENHA) VALUES (%s, %s, %s);', (login, nome, senha))
+        self.conexao.commit()
+        print("\n{} seu cadastro foi realizado com sucesso!".format(nome))
+
+    def validarLogin(self, login, senha):
+        self.login = login
+        self.senha = senha
+        self.cursor.execute('SELECT * FROM tab_login WHERE DSC_CPF = "?"', (login))
+        self.loginsCadastrados = self.cursor.fetchall()
+        print("Total de cadastros :" , self.cursor.rowcount)
+        for self.verificandoLogin in self.loginsCadastrados:
+            print(self.verificandoLogin[0])
+
+
+teste1 = Login()
+
+teste1.conectarBD()
+
+while True:
+
+    print("\n1 - Login\n" +
+          "\n2 - Cadastro\n" +
+          "\n3 - Sair\n")
+    opcao = input("\n>>> ")
+
+    if opcao == "1":
+        login = input("\nLogin(*CPF*)\n>>> ")
+        senha = input("\nSenha: \n>>> ")
+        teste1.validarLogin(login, senha)
+
+    elif opcao == "2":
+        login = input("\nLogin(*CPF*):\n>>> ")
+        nome = input("\nNome: \n>>> ")
+        senha = input("\nSenha: \n>>> ")
+        teste1.realizarCadastro(login, nome, senha)
+
+    elif opcao == "3":
+        print("Finalizando...")
+        teste1.desconectarBD()
+        break
+
+    else:
+        print("Opção inválida :c")
