@@ -1,4 +1,5 @@
 import mysql.connector
+import getpass
 
 class Login():
 
@@ -6,9 +7,10 @@ class Login():
         pass
 
     def conectarBD(self):
-        self.conexao = mysql.connector.connect(host='localhost', database='testepython', user='root', password='#Guilhermeb1*')
+        senha = getpass.getpass('\nDigite a senha para conexão com o banco de dados:\n\n>>> ')
+        self.conexao = mysql.connector.connect(host='localhost', database='testepython', user='root', password=senha)
         if self.conexao.is_connected():
-            """print("\n----------Conectou pai----------\n")"""
+            print("\n----------Conectado----------\n")
             self.cursor = self.conexao.cursor()
 
     def desconectarBD(self):
@@ -23,11 +25,11 @@ class Login():
     def validarLogin(self, login, senha):
         self.login = login
         self.senha = senha
-        self.cursor.execute('SELECT * FROM tab_login WHERE DSC_CPF = "?"', (login))
-        self.loginsCadastrados = self.cursor.fetchall()
-        print("Total de cadastros :" , self.cursor.rowcount)
-        for self.verificandoLogin in self.loginsCadastrados:
-            print(self.verificandoLogin[0])
+        self.sqlLogin = "SELECT DSC_CPF FROM tab_login"
+        self.cursor.execute(self.sqlLogin)
+        self.resultadoLogin = self.cursor.fetchone()
+        self.sqlSenha = "SELECT DSC_SENHA FROM tab_login"
+        self.cursor.execute(self.sqlSenha)
 
 
 teste1 = Login()
@@ -58,4 +60,4 @@ while True:
         break
 
     else:
-        print("Opção inválida :c")
+        print("Opção inválida :c") 
